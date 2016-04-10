@@ -55,6 +55,7 @@ public class CategoryTaskDataSource {
         Category newCategory = cursorToCategory(cursor);
         cursor.close();
 
+
         return newCategory;
     }
 
@@ -154,6 +155,23 @@ public class CategoryTaskDataSource {
             deleteTask(task);
         }
         database.delete(MySQLiteHelper.TABLE_CATEGORY, MySQLiteHelper.KEY_ID + " = " + id, null);
+    }
+
+    public List<Category> getCategories() {
+        List<Category> categories = new ArrayList<>();
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_CATEGORY, categoryColumns, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()) {
+            Category category = cursorToCategory(cursor);
+            categories.add(category);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return categories;
+
     }
 
 

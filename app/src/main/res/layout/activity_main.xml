@@ -10,4 +10,11 @@
     tools:context=".ui.activity.MainActivity"
     android:background="#EEF5DB">
 
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoriesGridView"
+        android:layout_alignParentLeft="true"
+        android:numColumns="2"/>
+
 </RelativeLayout>
