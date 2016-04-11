@@ -2,6 +2,7 @@ package com.example.rodri.todo.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.category.Category;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
+import com.example.rodri.todo.ui.activity.TasksActivity;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -80,6 +82,19 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent tasksList = new Intent(activity, TasksActivity.class);
+                    tasksList.putExtra("CATEGORY_ID", lCategory.get(position).getId());
+                    activity.startActivity(tasksList);
+                    activity.finish();
+
+                }
+            });
+
 
             dataSource.close();
 

@@ -1,16 +1,21 @@
 <resources>
     <string name="app_name">ToDo</string>
 
-    <!--  Title  -->
+    <!--  Menu Title  -->
     <string name="add_category">Add Category</string>
+    <string name="add_task">Add Task</string>
 
     <!--  Text View  -->
     <string name="new_category">New Category</string>
+    <string name="new_task">New Task</string>
 
     <!--  Button  -->
     <string name="confirm">Confirm</string>
+    <string name="set_deadline_date">Set Deadline Date</string>
 
     <!--  Hint  -->
     <string name="category_name">category name</string>
+    <string name="task_name">task name</string>
+    <string name="priority">priority</string>
 
 </resources>

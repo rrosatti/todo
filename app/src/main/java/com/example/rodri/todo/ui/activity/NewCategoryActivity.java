@@ -37,7 +37,7 @@ public class NewCategoryActivity extends Activity {
                 String categoryName = etCategoryName.getText().toString();
 
                 if (categoryName.equals("")) {
-                    Toast.makeText(NewCategoryActivity.this, "You need to say the category name!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NewCategoryActivity.this, "You need to write the category name!", Toast.LENGTH_LONG).show();
                     return;
                 } else {
 
