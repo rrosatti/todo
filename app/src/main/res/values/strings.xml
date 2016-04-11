@@ -12,7 +12,7 @@
 
     <!--  Button  -->
     <string name="confirm">Confirm</string>
-    <string name="set_deadline_date">Set Deadline Date</string>
+    <string name="set_due_date">Set Due Date</string>
 
     <!--  Hint  -->
     <string name="category_name">category name</string>
