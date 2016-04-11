@@ -22,26 +22,41 @@
         android:textStyle="italic"
         android:layout_marginTop="53dp" />
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPriority"
+        android:text="@string/priority"
+        android:textSize="11pt"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/etTaskName"
+        android:layout_marginTop="40dp"/>
+
+    <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/etPriority"
-        android:hint="@string/priority"
-        android:textStyle="italic"
-        android:layout_below="@+id/etTaskName"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        android:id="@+id/prioritySeekBar"
+        android:layout_below="@+id/txtPriority"
+        android:layout_marginTop="4dp"
+        android:max="5"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNumPriority"
+        android:layout_below="@+id/prioritySeekBar"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_deadline_date"
         android:id="@+id/btSetDeadlineDate"
-        android:layout_below="@+id/etPriority"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/txtNumPriority" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,4 +66,6 @@
         android:layout_below="@+id/btSetDeadlineDate"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp" />
+
+
 </RelativeLayout>
