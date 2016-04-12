@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.category.Category;
@@ -75,7 +76,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                 List<Task> tasks = dataSource.getTasksByCategory(lCategory.get(position).getId());
                 System.out.println("I've been here?");
                 if (tasks.size() > 0) {
-                    holder.displayNumTasks.setText(String.valueOf(tasks.size()) + " items");
+                    holder.displayNumTasks.setText(tasks.size() + " items");
                 } else {
                     holder.displayNumTasks.setText("0 items");
                 }
@@ -90,7 +91,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
                     Intent tasksList = new Intent(activity, TasksActivity.class);
                     tasksList.putExtra("CATEGORY_ID", lCategory.get(position).getId());
                     activity.startActivity(tasksList);
-                    activity.finish();
 
                 }
             });

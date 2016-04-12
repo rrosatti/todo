@@ -20,7 +20,7 @@
 
         <activity android:name=".ui.activity.NewCategoryActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".ui.activity.TasksActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.activity.TasksActivity" android:label="" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".ui.activity.NewTaskActivity" android:screenOrientation="portrait"></activity>
     </application>

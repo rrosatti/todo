@@ -14,14 +14,17 @@ import com.example.rodri.todo.R;
  */
 public class TasksActivity extends AppCompatActivity {
 
+    long category_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list);
 
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            long category_id = extras.getLong("CATEGORY_ID");
+            category_id = extras.getLong("CATEGORY_ID");
         }
 
 
@@ -41,6 +44,7 @@ public class TasksActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case (R.id.addTask) :
                 Intent newTask = new Intent(TasksActivity.this, NewTaskActivity.class);
+                newTask.putExtra("CATEGORY_ID", category_id);
                 startActivity(newTask);
                 finish();
                 break;

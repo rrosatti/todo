@@ -125,8 +125,12 @@ public class CategoryTaskDataSource {
 
     public List<Task> getTasksByCategory(long categoryId) {
         List<Task> tasks = new ArrayList<>();
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_CATEGORY_TASK, categoryTaskColumns,
-                                        MySQLiteHelper.KEY_ID + " = " + categoryId, null, null, null, null);
+        Cursor cursor = database.rawQuery("SELECT * FROM " + dbHelper.TABLE_TASK + " tt, "
+                                            + dbHelper.TABLE_CATEGORY + " tc, "
+                                            + dbHelper.TABLE_CATEGORY_TASK + " ct WHERE tc." + dbHelper.KEY_ID
+                                            + " = " + categoryId + " AND tt." + dbHelper.KEY_ID
+                                            + " = " + "ct." + dbHelper.COLUMN_TASK_ID + " AND tc." + dbHelper.KEY_ID
+                                            + " = " + "ct." + dbHelper.COLUMN_CATEGORY_ID, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
