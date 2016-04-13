@@ -15,6 +15,7 @@ import com.example.rodri.todo.task.Task;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,12 +25,12 @@ import java.util.List;
 public class TaskAdapter extends BaseExpandableListAdapter {
 
     private Activity activity;
-    private HashMap<String, List<Task>> items;
+    private HashMap<String, ArrayList<Task>> items;
     private static LayoutInflater inflater = null;
     private CategoryTaskDataSource dataSource;
     private String[] groupPos;
 
-    public TaskAdapter (Activity activity, HashMap<String, List<Task>> items) {
+    public TaskAdapter (Activity activity, HashMap<String, ArrayList<Task>> items) {
         this.activity = activity;
         this.items = items;
         this.groupPos = new String[items.size()];
@@ -71,6 +72,15 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         holder.displayDueDate = (TextView) v.findViewById(R.id.txtDueDate);
 
         holder.displayTaskName.setText(task.getTaskName());
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(Long.parseLong(task.getDueDate()));
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String date = day + "/" + month + "/" + year;
+        holder.displayDueDate.setText(date);
 
         v.setTag(holder);
 
