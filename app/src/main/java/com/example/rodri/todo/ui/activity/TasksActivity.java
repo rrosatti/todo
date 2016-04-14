@@ -14,11 +14,14 @@ import com.example.rodri.todo.task.Task;
 import com.example.rodri.todo.ui.adapter.TaskAdapter;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rodri on 4/11/2016.
@@ -54,13 +57,31 @@ public class TasksActivity extends AppCompatActivity {
                 groupsAndTasks.put(groupNames[i], new ArrayList<Task>());
             }
 
-            long tomorrowInMillis = 86400000;
+            long today = 0, tomorrow = 0;
+
+            Calendar cal = new GregorianCalendar();
+            String todayString = cal.get(Calendar.DAY_OF_MONTH) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
+            cal.add(Calendar.DATE, 1);
+            String tomorrowString = cal.get(Calendar.DAY_OF_MONTH) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
+            try {
+                Date time = new SimpleDateFormat("dd-MM-yyyy").parse(todayString);
+                Date time2 = new SimpleDateFormat("dd-MM-yyyy").parse(tomorrowString);
+                today = time.getTime();
+                tomorrow = time2.getTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
 
             for (Task task : tasks) {
-                if (Long.parseLong(task.getDueDate()) == System.currentTimeMillis() ) {
+                long dueDate = Long.parseLong(task.getDueDate());
+                System.out.println("dueDate: " + dueDate + " today: " + today);
+                if ( dueDate == today ) {
                     groupsAndTasks.get(groupNames[0]).add(task);
                 } else
-                    if (Long.parseLong(task.getDueDate()) == (System.currentTimeMillis() + tomorrowInMillis)) {
+                    if (dueDate == tomorrow) {
                         groupsAndTasks.get(groupNames[1]).add(task);
                     } else {
                         groupsAndTasks.get(groupNames[2]).add(task);
