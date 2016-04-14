@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class TaskAdapter extends BaseExpandableListAdapter {
     private CategoryTaskDataSource dataSource;
     private String[] groupPos;
 
-    public TaskAdapter (Activity activity, HashMap<String, ArrayList<Task>> items) {
+    public TaskAdapter (Activity activity, LinkedHashMap<String, ArrayList<Task>> items) {
         this.activity = activity;
         this.items = items;
         this.groupPos = new String[items.size()];
@@ -67,9 +68,15 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         Task task = getChild(groupPosition, childPosition);
         if (convertView == null) {
             v = inflater.inflate(R.layout.custom_item, null);
+
+            holder.displayTaskName = (TextView) v.findViewById(R.id.txtTaskName);
+            holder.displayDueDate = (TextView) v.findViewById(R.id.txtDueDate);
+
+            v.setTag(holder);
+
+        } else {
+            holder = (ViewHolder) v.getTag();
         }
-        holder.displayTaskName = (TextView) v.findViewById(R.id.txtTaskName);
-        holder.displayDueDate = (TextView) v.findViewById(R.id.txtDueDate);
 
         holder.displayTaskName.setText(task.getTaskName());
 
@@ -82,7 +89,6 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         String date = day + "/" + month + "/" + year;
         holder.displayDueDate.setText(date);
 
-        v.setTag(holder);
 
         return v;
     }
@@ -114,12 +120,17 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         View v = convertView;
         if (convertView == null) {
             v = inflater.inflate(R.layout.custom_group, null);
+
+
+            v.setTag(holder);
+        } else {
+            holder = (ViewHolder) v.getTag();
         }
+
 
         holder.displayGroupName = (TextView) v.findViewById(R.id.txtGroupName);
         holder.displayGroupName.setText(groupPos[groupPosition]);
 
-        v.setTag(holder);
 
         return v;
     }

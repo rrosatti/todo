@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +33,7 @@ public class TasksActivity extends AppCompatActivity {
     private TaskAdapter taskAdapter;
     private CategoryTaskDataSource dataSource;
     private ExpandableListView taskExpListView;
-    private HashMap<String, ArrayList<Task>> groupsAndTasks;
+    private LinkedHashMap<String, ArrayList<Task>> groupsAndTasks;
     private List<Task> tasks;
     String[] groupNames;
 
@@ -53,7 +54,6 @@ public class TasksActivity extends AppCompatActivity {
             tasks = dataSource.getAllTasks();
             groupNames = new String[] { "Today", "Tomorrow", "Upcoming" };
             for (int i = 0; i < groupNames.length; i++) {
-                System.out.println("group: " + groupNames[i]);
                 groupsAndTasks.put(groupNames[i], new ArrayList<Task>());
             }
 
@@ -77,7 +77,6 @@ public class TasksActivity extends AppCompatActivity {
 
             for (Task task : tasks) {
                 long dueDate = Long.parseLong(task.getDueDate());
-                System.out.println("dueDate: " + dueDate + " today: " + today);
                 if ( dueDate == today ) {
                     groupsAndTasks.get(groupNames[0]).add(task);
                 } else
@@ -126,7 +125,7 @@ public class TasksActivity extends AppCompatActivity {
     public void initialize() {
         taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
         dataSource = new CategoryTaskDataSource(TasksActivity.this);
-        groupsAndTasks = new HashMap<>();
+        groupsAndTasks = new LinkedHashMap<>();
 
     }
 

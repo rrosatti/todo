@@ -74,7 +74,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             try {
                 dataSource.open();
                 List<Task> tasks = dataSource.getTasksByCategory(lCategory.get(position).getId());
-                System.out.println("I've been here?");
                 if (tasks.size() > 0) {
                     holder.displayNumTasks.setText(tasks.size() + " items");
                 } else {
