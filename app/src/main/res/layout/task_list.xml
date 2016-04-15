@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:background="#EEF5DB">
 
-    <ExpandableListView
+
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tasksExpListView"
-        android:layout_marginTop="80dp"
-        android:groupIndicator="@drawable/group_indicator"/>
+        android:layout_height="match_parent"
+        android:id="@+id/tasksListView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.rodri.todo.R;
@@ -33,6 +34,7 @@ public class TasksActivity extends AppCompatActivity {
     private TaskAdapter taskAdapter;
     private CategoryTaskDataSource dataSource;
     private ExpandableListView taskExpListView;
+    private ListView tasksListView;
     private LinkedHashMap<String, ArrayList<Task>> groupsAndTasks;
     private List<Task> tasks;
     String[] groupNames;
@@ -90,7 +92,7 @@ public class TasksActivity extends AppCompatActivity {
             }
 
             taskAdapter = new TaskAdapter(TasksActivity.this, groupsAndTasks);
-            taskExpListView.setAdapter(taskAdapter);
+            tasksListView.setAdapter(taskAdapter);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,7 +127,8 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void initialize() {
-        taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
+        tasksListView = (ListView) findViewById(R.id.tasksListView);
+        //taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
         dataSource = new CategoryTaskDataSource(TasksActivity.this);
         groupsAndTasks = new LinkedHashMap<>();
 
