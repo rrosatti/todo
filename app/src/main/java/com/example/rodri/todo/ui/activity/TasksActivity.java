@@ -52,7 +52,7 @@ public class TasksActivity extends AppCompatActivity {
             dataSource.open();
 
             tasks = dataSource.getAllTasks();
-            groupNames = new String[] { "Today", "Tomorrow", "Upcoming" };
+            groupNames = new String[] { "Today", "Tomorrow", "Upcoming", "Past" };
             for (int i = 0; i < groupNames.length; i++) {
                 groupsAndTasks.put(groupNames[i], new ArrayList<Task>());
             }
@@ -82,8 +82,10 @@ public class TasksActivity extends AppCompatActivity {
                 } else
                     if (dueDate == tomorrow) {
                         groupsAndTasks.get(groupNames[1]).add(task);
-                    } else {
+                    } else if (dueDate > tomorrow){
                         groupsAndTasks.get(groupNames[2]).add(task);
+                    } else {
+                        groupsAndTasks.get(groupNames[3]).add(task);
                     }
             }
 

@@ -2,6 +2,7 @@ package com.example.rodri.todo.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,11 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         }
 
         holder.displayTaskName.setText(task.getTaskName());
+
+        if (groupPosition == 3) {
+            //holder.displayTaskName.setTextAppearance(activity, R.style.pastTask);
+            //holder.displayDueDate.setTextAppearance(activity, R.style.pastTask);
+        }
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(Long.parseLong(task.getDueDate()));
