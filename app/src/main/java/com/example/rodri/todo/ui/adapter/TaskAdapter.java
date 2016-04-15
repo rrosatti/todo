@@ -68,6 +68,7 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         ViewHolder holder = new ViewHolder();
         Task task = getChild(groupPosition, childPosition);
         if (convertView == null) {
+            
             v = inflater.inflate(R.layout.custom_item, null);
 
             holder.displayTaskName = (TextView) v.findViewById(R.id.txtTaskName);
