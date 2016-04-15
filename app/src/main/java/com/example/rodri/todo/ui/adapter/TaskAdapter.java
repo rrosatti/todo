@@ -68,7 +68,7 @@ public class TaskAdapter extends BaseExpandableListAdapter {
         ViewHolder holder = new ViewHolder();
         Task task = getChild(groupPosition, childPosition);
         if (convertView == null) {
-            
+
             v = inflater.inflate(R.layout.custom_item, null);
 
             holder.displayTaskName = (TextView) v.findViewById(R.id.txtTaskName);
@@ -82,6 +82,7 @@ public class TaskAdapter extends BaseExpandableListAdapter {
 
         holder.displayTaskName.setText(task.getTaskName());
 
+        //Just testing git branch
         if (groupPosition == 3) {
             //holder.displayTaskName.setTextAppearance(activity, R.style.pastTask);
             //holder.displayDueDate.setTextAppearance(activity, R.style.pastTask);
