@@ -14,7 +14,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "todoManager.db";
 
     // Database version
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     // Table names
     public static final String TABLE_TASK = "tasks";
@@ -28,6 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_NAME = "task_name";
     public static final String COLUMN_PRIORITY = "priority";
     public static final String COLUMN_DUE_DATE = "due_date";
+    public static final String COLUMN_SET_ALARM = "set_alarm";
 
     // Category column name
     public static final String COLUMN_CATEGORY_NAME = "category_name";
@@ -69,11 +70,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(MySQLiteHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion
-                                                + ", which will destroy all old data.");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY_TASK);
-        onCreate(db);
+                + ", which will destroy all old data.");
+        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
+        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
+        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY_TASK);
+        //onCreate(db);
+        if (oldVersion == 1 && newVersion == 2) {
+            db.execSQL("ALTER TABLE " + TABLE_TASK + " ADD COLUMN setAlarm INTEGER DEFAULT 0");
+        }
     }
 
 }

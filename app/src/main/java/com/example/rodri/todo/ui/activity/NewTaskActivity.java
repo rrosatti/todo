@@ -112,7 +112,7 @@ public class NewTaskActivity extends Activity {
 
                     try {
                         dataSource.open();
-                        dataSource.createTask(taskName, Integer.parseInt(priority), String.valueOf(dateInMillis), category_id);
+                        dataSource.createTask(taskName, Integer.parseInt(priority), String.valueOf(dateInMillis), category_id, 0);
                         Toast.makeText(NewTaskActivity.this, "HEYY!", Toast.LENGTH_LONG).show();
 
                         dataSource.close();

@@ -22,7 +22,8 @@ public class CategoryTaskDataSource {
     private String[] taskColumns = { MySQLiteHelper.KEY_ID,
                                         MySQLiteHelper.COLUMN_TASK_NAME,
                                         MySQLiteHelper.COLUMN_PRIORITY,
-                                        MySQLiteHelper.COLUMN_DUE_DATE };
+                                        MySQLiteHelper.COLUMN_DUE_DATE,
+                                        MySQLiteHelper.COLUMN_SET_ALARM};
 
     private String[] categoryColumns = { MySQLiteHelper.KEY_ID,
                                             MySQLiteHelper.COLUMN_CATEGORY_NAME };
@@ -66,11 +67,12 @@ public class CategoryTaskDataSource {
         return category;
     }
 
-    public Task createTask(String taskName, int priority, String dueDate, long categoryId) {
+    public Task createTask(String taskName, int priority, String dueDate, long categoryId, int setAlarm) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_TASK_NAME, taskName);
         values.put(MySQLiteHelper.COLUMN_PRIORITY, priority);
         values.put(MySQLiteHelper.COLUMN_DUE_DATE, dueDate);
+        values.put(MySQLiteHelper.COLUMN_SET_ALARM, setAlarm);
 
         long insertId = database.insert(MySQLiteHelper.TABLE_TASK, null, values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_TASK, taskColumns,
@@ -92,6 +94,7 @@ public class CategoryTaskDataSource {
         task.setTaskName(cursor.getString(1));
         task.setPriority(cursor.getInt(2));
         task.setDueDate(cursor.getString(3));
+        task.setSetAlarm(cursor.getInt(4));
         return task;
     }
 
@@ -126,11 +129,11 @@ public class CategoryTaskDataSource {
     public List<Task> getTasksByCategory(long categoryId) {
         List<Task> tasks = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM " + dbHelper.TABLE_TASK + " tt, "
-                                            + dbHelper.TABLE_CATEGORY + " tc, "
-                                            + dbHelper.TABLE_CATEGORY_TASK + " ct WHERE tc." + dbHelper.KEY_ID
-                                            + " = " + categoryId + " AND tt." + dbHelper.KEY_ID
-                                            + " = " + "ct." + dbHelper.COLUMN_TASK_ID + " AND tc." + dbHelper.KEY_ID
-                                            + " = " + "ct." + dbHelper.COLUMN_CATEGORY_ID, null);
+                + dbHelper.TABLE_CATEGORY + " tc, "
+                + dbHelper.TABLE_CATEGORY_TASK + " ct WHERE tc." + dbHelper.KEY_ID
+                + " = " + categoryId + " AND tt." + dbHelper.KEY_ID
+                + " = " + "ct." + dbHelper.COLUMN_TASK_ID + " AND tc." + dbHelper.KEY_ID
+                + " = " + "ct." + dbHelper.COLUMN_CATEGORY_ID, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -149,6 +152,16 @@ public class CategoryTaskDataSource {
         System.out.println("The task with id " + id + " was removed.");
         database.delete(MySQLiteHelper.TABLE_TASK, MySQLiteHelper.KEY_ID + " = " + id, null);
         database.delete(MySQLiteHelper.TABLE_CATEGORY_TASK, MySQLiteHelper.COLUMN_TASK_ID + " = " + id, null);
+    }
+
+    public void updateTask(Task task) {
+        long id = task.getId();
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_TASK_NAME, task.getTaskName());
+        values.put(MySQLiteHelper.COLUMN_PRIORITY, task.getPriority());
+        values.put(MySQLiteHelper.COLUMN_DUE_DATE, task.getDueDate());
+        values.put(MySQLiteHelper.COLUMN_SET_ALARM, task.getSetAlarm());
+        database.update(MySQLiteHelper.TABLE_TASK, values, MySQLiteHelper.KEY_ID + " = " + id, null);
     }
 
     public void deleteCategory(Category category) {

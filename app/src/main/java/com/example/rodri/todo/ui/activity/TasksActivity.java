@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -17,6 +19,7 @@ import com.example.rodri.todo.util.Util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -29,9 +32,9 @@ public class TasksActivity extends AppCompatActivity {
     private TaskAdapter taskAdapter;
     private CategoryTaskDataSource dataSource;
     private ExpandableListView taskExpListView;
-    private ListView tasksListView;
     private LinkedHashMap<String, ArrayList<Task>> groupsAndTasks;
     private List<Task> tasks;
+    private Button setNotification;
     String[] groupNames;
 
     @Override
@@ -50,29 +53,8 @@ public class TasksActivity extends AppCompatActivity {
 
             tasks = dataSource.getTasksByCategory(category_id);
             groupNames = new String[] { "Today", "Tomorrow", "Upcoming", "Past" };
-            for (int i = 0; i < groupNames.length; i++) {
-                groupsAndTasks.put(groupNames[i], new ArrayList<Task>());
-            }
 
-            long today = 0, tomorrow = 0;
-
-            today = Util.getTodayInMillis();
-            tomorrow = Util.getTomorrowInMillis();
-
-
-            for (Task task : tasks) {
-                long dueDate = Long.parseLong(task.getDueDate());
-                if ( dueDate == today ) {
-                    groupsAndTasks.get(groupNames[0]).add(task);
-                } else
-                    if (dueDate == tomorrow) {
-                        groupsAndTasks.get(groupNames[1]).add(task);
-                    } else if (dueDate > tomorrow){
-                        groupsAndTasks.get(groupNames[2]).add(task);
-                    } else {
-                        groupsAndTasks.get(groupNames[3]).add(task);
-                    }
-            }
+            groupsAndTasks = Util.getHashMapForTasks(groupNames, tasks);
 
             taskAdapter = new TaskAdapter(TasksActivity.this, groupsAndTasks);
             taskExpListView.setAdapter(taskAdapter);
@@ -80,6 +62,21 @@ public class TasksActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        setNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Task> tasks = new ArrayList<Task>();
+                for (int i = 0; i < groupsAndTasks.size() - 1; i++) {
+                    for (Task task : groupsAndTasks.get(groupNames[i])) {
+                        tasks.add(task);
+                    }
+                }
+                Intent showTasksAbleToSetNotification = new Intent(TasksActivity.this, TasksNotificationActivity.class);
+                showTasksAbleToSetNotification.putExtra("CATEGORY_ID", category_id);
+                startActivity(showTasksAbleToSetNotification);
+            }
+        });
 
         dataSource.close();
 
@@ -110,10 +107,10 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void initialize() {
-        //tasksListView = (ListView) findViewById(R.id.tasksListView);
         taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
         dataSource = new CategoryTaskDataSource(TasksActivity.this);
         groupsAndTasks = new LinkedHashMap<>();
+        setNotification = (Button) findViewById(R.id.btSetNotification);
 
     }
 

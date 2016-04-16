@@ -9,6 +9,7 @@ public class Task {
     private String taskName;
     private int priority;
     private String dueDate;
+    private int setAlarm;
 
     public long getId() {
         return id;
@@ -40,6 +41,14 @@ public class Task {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public int getSetAlarm() {
+        return setAlarm;
+    }
+
+    public void setSetAlarm(int setAlarm) {
+        this.setAlarm = setAlarm;
     }
 
 }
