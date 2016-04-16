@@ -13,17 +13,12 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
 import com.example.rodri.todo.ui.adapter.TaskAdapter;
+import com.example.rodri.todo.util.Util;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rodri on 4/11/2016.
@@ -53,7 +48,7 @@ public class TasksActivity extends AppCompatActivity {
         try {
             dataSource.open();
 
-            tasks = dataSource.getAllTasks();
+            tasks = dataSource.getTasksByCategory(category_id);
             groupNames = new String[] { "Today", "Tomorrow", "Upcoming", "Past" };
             for (int i = 0; i < groupNames.length; i++) {
                 groupsAndTasks.put(groupNames[i], new ArrayList<Task>());
@@ -61,20 +56,8 @@ public class TasksActivity extends AppCompatActivity {
 
             long today = 0, tomorrow = 0;
 
-            Calendar cal = new GregorianCalendar();
-            String todayString = cal.get(Calendar.DAY_OF_MONTH) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
-            cal.add(Calendar.DATE, 1);
-            String tomorrowString = cal.get(Calendar.DAY_OF_MONTH) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
-            try {
-                Date time = new SimpleDateFormat("dd-MM-yyyy").parse(todayString);
-                Date time2 = new SimpleDateFormat("dd-MM-yyyy").parse(tomorrowString);
-                today = time.getTime();
-                tomorrow = time2.getTime();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
+            today = Util.getTodayInMillis();
+            tomorrow = Util.getTomorrowInMillis();
 
 
             for (Task task : tasks) {
@@ -92,7 +75,7 @@ public class TasksActivity extends AppCompatActivity {
             }
 
             taskAdapter = new TaskAdapter(TasksActivity.this, groupsAndTasks);
-            tasksListView.setAdapter(taskAdapter);
+            taskExpListView.setAdapter(taskAdapter);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,8 +110,8 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     public void initialize() {
-        tasksListView = (ListView) findViewById(R.id.tasksListView);
-        //taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
+        //tasksListView = (ListView) findViewById(R.id.tasksListView);
+        taskExpListView = (ExpandableListView) findViewById(R.id.tasksExpListView);
         dataSource = new CategoryTaskDataSource(TasksActivity.this);
         groupsAndTasks = new LinkedHashMap<>();
 

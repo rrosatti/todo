@@ -54,6 +54,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
     public View getView (final int position, View convertView, final ViewGroup parent) {
         View v = convertView;
         final ViewHolder holder;
+        System.out.println("category pos: " + position);
         try {
             if (convertView == null) {
                 v = inflater.inflate(R.layout.categories_list, null);
