@@ -3,7 +3,7 @@ package com.example.rodri.todo.task;
 /**
  * Created by rodri on 4/9/2016.
  */
-public class Task {
+public class Task implements Cloneable {
 
     private long id;
     private String taskName;
@@ -49,6 +49,16 @@ public class Task {
 
     public void setSetAlarm(int setAlarm) {
         this.setAlarm = setAlarm;
+    }
+
+    @Override
+    public Task clone() {
+        try {
+            final Task result = (Task) super.clone();
+            return result;
+        } catch (final CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
 }

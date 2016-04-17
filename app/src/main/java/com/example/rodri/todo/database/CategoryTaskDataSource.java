@@ -147,6 +147,17 @@ public class CategoryTaskDataSource {
         return tasks;
     }
 
+    public Task getTask(long task_id) {
+        List<Task> tasks = getAllTasks();
+        Task task = new Task();
+        for (Task t : tasks) {
+            if (t.getId() == task_id) task = t.clone();
+        }
+
+        return task;
+
+    }
+
     public void deleteTask(Task task) {
         long id = task.getId();
         System.out.println("The task with id " + id + " was removed.");
