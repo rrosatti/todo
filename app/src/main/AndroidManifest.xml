@@ -26,6 +26,8 @@
 
         <activity android:name=".ui.activity.TasksNotificationActivity" android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".ui.activity.NotificationActivity" android:screenOrientation="portrait"></activity>
+
         <receiver android:name=".notification.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />

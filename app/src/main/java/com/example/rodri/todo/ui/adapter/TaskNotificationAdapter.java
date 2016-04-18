@@ -104,6 +104,7 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
                         cal.setTimeInMillis(taskTimeInMillis);
                         cal.add(Calendar.HOUR, (int) selectedHour);
                         cal.add(Calendar.MINUTE, (int) selectedMinute);
+                        System.out.println("hour: " + (int) selectedHour);
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
 
                         Toast.makeText(activity, "Notification set to " + Util.convertDateInMillisToString(cal.getTimeInMillis()), Toast.LENGTH_LONG).show();

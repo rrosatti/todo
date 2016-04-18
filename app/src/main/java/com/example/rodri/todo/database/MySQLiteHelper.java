@@ -14,7 +14,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "todoManager.db";
 
     // Database version
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     // Table names
     public static final String TABLE_TASK = "tasks";
@@ -75,8 +75,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY_TASK);
         //onCreate(db);
-        if (oldVersion == 1 && newVersion == 2) {
-            db.execSQL("ALTER TABLE " + TABLE_TASK + " ADD COLUMN setAlarm INTEGER DEFAULT 0");
+        if (oldVersion == 2 && newVersion == 3) {
+            db.execSQL("ALTER TABLE " + TABLE_TASK + " ADD COLUMN set_alarm INTEGER DEFAULT 0");
         }
     }
 

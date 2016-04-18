@@ -34,6 +34,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent notificationIntent = new Intent(context, NotificationActivity.class);
         notificationIntent.putExtra("TASK_ID", task_id);
 
+        dataSource = new CategoryTaskDataSource(context);
 
         try {
             dataSource.open();

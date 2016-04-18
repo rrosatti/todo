@@ -27,7 +27,7 @@ public class NotificationActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            taskId = extras.getInt("TASK_ID");
+            taskId = extras.getLong("TASK_ID");
         }
 
         try {
