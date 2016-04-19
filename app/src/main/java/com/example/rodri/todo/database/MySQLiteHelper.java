@@ -93,6 +93,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (oldVersion == 3 && newVersion == 4) {
             db.execSQL(CREATE_TABLE_ALARM);
         }
+        System.out.println("I've been here");
     }
 
 }
