@@ -8,7 +8,8 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
 import com.example.rodri.todo.ui.adapter.TaskNotificationAdapter;
-import com.example.rodri.todo.util.Util;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
+import com.example.rodri.todo.utils.Util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class TasksNotificationActivity extends Activity {
 
             List<Task> temp = dataSource.getTasksByCategory(category_id);
             String[] groupNames = new String[] { "Today", "Tomorrow", "Upcoming", "Past" };
-            groupAndTasks = Util.getHashMapForTasks(groupNames, temp);
+            groupAndTasks = DateAndTimeUtil.getHashMapForTasks(groupNames, temp);
 
             for (int i = 0; i < groupAndTasks.size() - 1; i++) {
                 for (Task task : groupAndTasks.get(groupNames[i])) {

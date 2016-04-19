@@ -1,13 +1,10 @@
 package com.example.rodri.todo.ui.activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
-import com.example.rodri.todo.util.Util;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;

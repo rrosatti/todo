@@ -12,10 +12,10 @@ import android.widget.Toast;
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
-import com.example.rodri.todo.util.Util;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
+import com.example.rodri.todo.utils.Util;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -80,7 +80,7 @@ public class TaskAdapter extends BaseExpandableListAdapter {
 
 
         holder.displayTaskName.setText(task.getTaskName());
-        String date = Util.convertDateInMillisToString(Long.valueOf(task.getDueDate()));
+        String date = DateAndTimeUtil.convertDateInMillisToString(Long.valueOf(task.getDueDate()));
         holder.displayDueDate.setText(date);
 
         final String taskName = task.getTaskName();

@@ -1,20 +1,23 @@
-package com.example.rodri.todo.util;
+package com.example.rodri.todo.utils;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.widget.Toast;
 
 import com.example.rodri.todo.services.SetAlarmManagerService;
 
 /**
  * Created by rodri on 4/19/2016.
  */
-public class BootBroadcastReceiver extends WakefulBroadcastReceiver {
+public class BootBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "I've been here (Broadcast)", Toast.LENGTH_LONG).show();
         Intent startIntentService = new Intent(context, SetAlarmManagerService.class);
-        startWakefulService(context, startIntentService);
+        context.startService(startIntentService);
     }
 
 }

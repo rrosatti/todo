@@ -8,18 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
 import com.example.rodri.todo.ui.adapter.TaskAdapter;
-import com.example.rodri.todo.util.Util;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
+import com.example.rodri.todo.utils.Util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class TasksActivity extends AppCompatActivity {
             tasks = dataSource.getTasksByCategory(category_id);
             groupNames = new String[] { "Today", "Tomorrow", "Upcoming", "Past" };
 
-            groupsAndTasks = Util.getHashMapForTasks(groupNames, tasks);
+            groupsAndTasks = DateAndTimeUtil.getHashMapForTasks(groupNames, tasks);
 
             taskAdapter = new TaskAdapter(TasksActivity.this, groupsAndTasks);
             taskExpListView.setAdapter(taskAdapter);

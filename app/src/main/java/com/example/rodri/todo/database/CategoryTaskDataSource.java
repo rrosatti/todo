@@ -234,5 +234,40 @@ public class CategoryTaskDataSource {
         return alarm;
     }
 
+    public boolean isThereAnyAlarm() {
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALARM, alarmColumns, null, null, null, null, null);
+        return  (cursor != null);
+    }
+
+    public List<Alarm> getAllAlarms() {
+        List<Alarm> alarms = new ArrayList<>();
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALARM, alarmColumns, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast()) {
+            Alarm alarm = cursorToAlarm(cursor);
+            alarms.add(alarm);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return alarms;
+    }
+
+    public Alarm getAlarmByTaskID(long task_id) {
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALARM, alarmColumns, MySQLiteHelper.COLUMN_TASK_ID + " = " + task_id,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Alarm alarm = cursorToAlarm(cursor);
+        cursor.close();
+        return alarm;
+    }
+
+    public void deleteAlarm(Alarm alarm) {
+        long alarm_id = alarm.getId();
+        database.delete(MySQLiteHelper.TABLE_ALARM, MySQLiteHelper.KEY_ID + " = " + alarm_id, null);
+    }
+
 
 }

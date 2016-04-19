@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.rodri.todo.R;
+import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
 
@@ -36,6 +37,10 @@ public class NotificationActivity extends Activity {
             Task task = dataSource.getTask(taskId);
 
             showNotification.setText("Remember -> " + task.getTaskName());
+
+            Alarm alarm = dataSource.getAlarmByTaskID(taskId);
+            System.out.println("alarm id: " + alarm.getId());
+            dataSource.deleteAlarm(alarm);
 
         } catch (SQLException e) {
             e.printStackTrace();

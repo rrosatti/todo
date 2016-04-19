@@ -1,8 +1,4 @@
-package com.example.rodri.todo.util;
-
-import android.app.Activity;
-import android.view.Window;
-import android.view.WindowManager;
+package com.example.rodri.todo.utils;
 
 import com.example.rodri.todo.task.Task;
 
@@ -11,22 +7,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * Created by rodri on 4/11/2016.
+ * Created by rodri on 4/19/2016.
  */
-public class Util {
-
-    public static void setFullScreen(Activity activity) {
-
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-    }
+public class DateAndTimeUtil {
 
     public static long getTomorrowInMillis() {
         long tomorrow = 0;
@@ -78,8 +65,8 @@ public class Util {
             groupsAndTasks.put(keys[i], new ArrayList<Task>());
         }
 
-        today = Util.getTodayInMillis();
-        tomorrow = Util.getTomorrowInMillis();
+        today = DateAndTimeUtil.getTodayInMillis();
+        tomorrow = DateAndTimeUtil.getTomorrowInMillis();
 
         for (Task task : tasks) {
             long dueDate = Long.parseLong(task.getDueDate());
@@ -98,5 +85,6 @@ public class Util {
         return groupsAndTasks;
 
     }
+
 
 }

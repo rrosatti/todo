@@ -15,10 +15,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.rodri.todo.R;
-import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
-import com.example.rodri.todo.util.Util;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
         }
 
         holder.displayTaskName.setText(tasks.get(position).getTaskName());
-        final String date = Util.convertDateInMillisToString(Long.parseLong(tasks.get(position).getDueDate()));
+        final String date = DateAndTimeUtil.convertDateInMillisToString(Long.parseLong(tasks.get(position).getDueDate()));
         holder.displayDueDate.setText(String.valueOf(date));
 
         v.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +92,7 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         selectedHour = hourOfDay;
                         selectedMinute = minute;
+
 
                         /**  set Alarm notification */
                         AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
@@ -116,7 +116,7 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
                             dataSource.open();
 
                             dataSource.createAlarm(tasks.get(position).getDueDate(),
-                                    Util.convertDateInMillisToString(cal.getTimeInMillis()), tasks.get(position).getId());
+                                    DateAndTimeUtil.convertDateInMillisToString(cal.getTimeInMillis()), tasks.get(position).getId());
 
                             dataSource.close();
 
@@ -124,7 +124,7 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
                             e.printStackTrace();
                         }
 
-                        Toast.makeText(activity, "Notification set to " + Util.convertDateInMillisToString(cal.getTimeInMillis()), Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Notification set to " + DateAndTimeUtil.convertDateInMillisToString(cal.getTimeInMillis()), Toast.LENGTH_LONG).show();
                         activity.finish();
 
 
