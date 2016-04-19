@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.category.Category;
 import com.example.rodri.todo.task.Task;
 
@@ -31,6 +32,11 @@ public class CategoryTaskDataSource {
     private String[] categoryTaskColumns = { MySQLiteHelper.KEY_ID,
                                                 MySQLiteHelper.COLUMN_TASK_ID,
                                                 MySQLiteHelper.COLUMN_CATEGORY_ID };
+
+    private String[] alarmColumns = { MySQLiteHelper.KEY_ID,
+                                        MySQLiteHelper.COLUMN_DATE,
+                                        MySQLiteHelper.COLUMN_ALARM_TIME,
+                                        MySQLiteHelper.COLUMN_TASK_ID };
 
     public CategoryTaskDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -200,6 +206,32 @@ public class CategoryTaskDataSource {
 
         return categories;
 
+    }
+
+    public Alarm createAlarm(String date, String time, long task_id) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_DATE, date);
+        values.put(MySQLiteHelper.COLUMN_ALARM_TIME, time);
+        values.put(MySQLiteHelper.COLUMN_TASK_ID, task_id);
+
+        long insertId = database.insert(MySQLiteHelper.TABLE_ALARM, null, values);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALARM, alarmColumns, MySQLiteHelper.KEY_ID + " = " + insertId,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Alarm alarm = cursorToAlarm(cursor);
+        cursor.close();
+
+        return alarm;
+
+    }
+
+    public Alarm cursorToAlarm(Cursor cursor) {
+        Alarm alarm = new Alarm();
+        alarm.setId(cursor.getLong(0));
+        alarm.setDate(cursor.getString(1));
+        alarm.setAlarmTime(cursor.getString(2));
+        alarm.setTaskId(cursor.getLong(3));
+        return alarm;
     }
 
 

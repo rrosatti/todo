@@ -14,12 +14,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "todoManager.db";
 
     // Database version
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
 
     // Table names
     public static final String TABLE_TASK = "tasks";
     public static final String TABLE_CATEGORY = "categories";
     public static final String TABLE_CATEGORY_TASK = "category_tasks";
+    public static final String TABLE_ALARM = "alarms";
 
     // Common column name
     public static final String KEY_ID = "id";
@@ -37,6 +38,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_ID = "task_id";
     public static final String COLUMN_CATEGORY_ID = "category_id";
 
+    // Alarm column names
+    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_ALARM_TIME = "alarm_time";
+
+    // Alarm table create
+    public static final String CREATE_TABLE_ALARM = "CREATE TABLE " + TABLE_ALARM + "("
+                                                    + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                                    + COLUMN_DATE + " TEXT NOT NULL, "
+                                                    + COLUMN_ALARM_TIME + " TEXT NOT NULL, "
+                                                    + COLUMN_TASK_ID + " INTEGER NOT NULL);";
 
     // Task table create
     public static final String CREATE_TABLE_TASK = "CREATE TABLE " + TABLE_TASK + "("
@@ -77,6 +88,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //onCreate(db);
         if (oldVersion == 2 && newVersion == 3) {
             db.execSQL("ALTER TABLE " + TABLE_TASK + " ADD COLUMN set_alarm INTEGER DEFAULT 0");
+        }
+
+        if (oldVersion == 3 && newVersion == 4) {
+            db.execSQL(CREATE_TABLE_ALARM);
         }
     }
 
