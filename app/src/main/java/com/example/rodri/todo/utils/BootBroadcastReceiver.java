@@ -15,7 +15,6 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "I've been here (Broadcast)", Toast.LENGTH_LONG).show();
         Intent startIntentService = new Intent(context, SetAlarmManagerService.class);
         context.startService(startIntentService);
     }

@@ -17,6 +17,8 @@
         android:layout_height="wrap_content"
         android:text="@string/rememberMe"
         android:id="@+id/btSetNotification"
+        android:background="@drawable/rounded_button"
+        style="@style/CustomButtonStyle"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="31dp"

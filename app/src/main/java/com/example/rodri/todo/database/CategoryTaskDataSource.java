@@ -269,5 +269,9 @@ public class CategoryTaskDataSource {
         database.delete(MySQLiteHelper.TABLE_ALARM, MySQLiteHelper.KEY_ID + " = " + alarm_id, null);
     }
 
+    public void removeOldAlarms(long todayInMillis) {
+        database.delete(MySQLiteHelper.TABLE_ALARM, MySQLiteHelper.COLUMN_ALARM_TIME + " < " + todayInMillis, null);
+    }
+
 
 }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.utils.AlarmManagerUtil;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,28 +34,26 @@ public class SetAlarmManagerService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
 
-        /** verify if there's a alarm set for 'today' */
-        Toast.makeText(getApplicationContext(), "I've been here (Service)", Toast.LENGTH_LONG).show();
         try {
             dataSource = new CategoryTaskDataSource(getApplicationContext());
             dataSource.open();
 
+            /** verify if there's a alarm set for 'today' */
             boolean verify = dataSource.isThereAnyAlarm();
-            Toast.makeText(getApplicationContext(), "verify: " + verify, Toast.LENGTH_LONG).show();
+
             if (verify) {
                 List<Alarm> alarms = dataSource.getAllAlarms();
-                Toast.makeText(getApplicationContext(), "alarms.size() " + alarms.size(), Toast.LENGTH_LONG).show();
                 for (Alarm alarm : alarms) {
                     long time = alarm.getAlarmTime();
                     long task_id = alarm.getTaskId();
-                    Toast.makeText(getApplicationContext(), "alarm id " + alarm.getId(), Toast.LENGTH_LONG).show();
                     AlarmManagerUtil.setAlarm(getApplicationContext(), time, task_id);
                 }
 
+                dataSource.removeOldAlarms(DateAndTimeUtil.getTodayInMillis());
+
             }
 
-
-            //WakefulBroadcastReceiver.completeWakefulIntent(intent);
+            dataSource.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

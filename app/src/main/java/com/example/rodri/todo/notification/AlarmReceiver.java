@@ -56,8 +56,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Notification notification = builder.setContentTitle("Reminder")
                 .setContentText("You need to: " + task.getTaskName())
-                .setSmallIcon(R.drawable.todo_2)
-                .setContentIntent(pendingIntent).build();
+                .setSmallIcon(R.drawable.alarm_notification)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true).build();
+
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);

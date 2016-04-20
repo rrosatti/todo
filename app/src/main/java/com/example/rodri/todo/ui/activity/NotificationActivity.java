@@ -8,6 +8,7 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
+import com.example.rodri.todo.utils.DateAndTimeUtil;
 
 import java.sql.SQLException;
 
@@ -17,7 +18,9 @@ import java.sql.SQLException;
 public class NotificationActivity extends Activity {
 
     private long taskId;
-    private TextView showNotification;
+    private TextView showNotificationTask;
+    private TextView showNotificationPriority;
+    private TextView showNotificationDate;
     private CategoryTaskDataSource dataSource;
 
     @Override
@@ -36,7 +39,9 @@ public class NotificationActivity extends Activity {
 
             Task task = dataSource.getTask(taskId);
 
-            showNotification.setText("Remember -> " + task.getTaskName());
+            showNotificationTask.setText(task.getTaskName());
+            showNotificationPriority.setText("Priority: " + task.getPriority());
+            showNotificationDate.setText(DateAndTimeUtil.convertDateInMillisToString(Long.parseLong(task.getDueDate())));
 
             Alarm alarm = dataSource.getAlarmByTaskID(taskId);
             System.out.println("alarm id: " + alarm.getId());
@@ -52,7 +57,9 @@ public class NotificationActivity extends Activity {
     }
 
     public void initialize() {
-        showNotification = (TextView) findViewById(R.id.txtNotification);
+        showNotificationTask = (TextView) findViewById(R.id.txtNotificationTask);
+        showNotificationPriority = (TextView) findViewById(R.id.txtNotificationPriority);
+        showNotificationDate = (TextView) findViewById(R.id.txtNotificationDate);
         dataSource = new CategoryTaskDataSource(NotificationActivity.this);
     }
 

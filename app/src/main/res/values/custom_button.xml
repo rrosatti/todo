@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomButtonStyle">
+        <item name="android:padding">3dp</item>
+        <item name="android:textColor">#EEF5DB</item>
+    </style>
+</resources>
