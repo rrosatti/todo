@@ -6,23 +6,23 @@ package com.example.rodri.todo.alarm;
 public class Alarm implements Cloneable {
 
     private long id;
-    private String date;
-    private String alarmTime;
+    private long date;
+    private long alarmTime;
     private long taskId;
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
-    public String getAlarmTime() {
+    public long getAlarmTime() {
         return alarmTime;
     }
 
-    public void setAlarmTime(String alarmTime) {
+    public void setAlarmTime(long alarmTime) {
         this.alarmTime = alarmTime;
     }
 

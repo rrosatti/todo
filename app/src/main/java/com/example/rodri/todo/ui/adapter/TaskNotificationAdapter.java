@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
+import com.example.rodri.todo.utils.AlarmManagerUtil;
 import com.example.rodri.todo.utils.DateAndTimeUtil;
 
 import java.sql.SQLException;
@@ -95,28 +96,30 @@ public class TaskNotificationAdapter extends ArrayAdapter<Task> {
 
 
                         /**  set Alarm notification */
-                        AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+      //                  AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
 
-                        Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
-                        notificationIntent.addCategory("android.intent.category.DEFAULT");
-                        notificationIntent.putExtra("TASK_ID", tasks.get(position).getId());
+    //                    Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+  //                      notificationIntent.addCategory("android.intent.category.DEFAULT");
+//                        notificationIntent.putExtra("TASK_ID", tasks.get(position).getId());
 
-                        PendingIntent broadcast = PendingIntent.getBroadcast(activity, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        //PendingIntent broadcast = PendingIntent.getBroadcast(activity, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                         long taskTimeInMillis = Long.parseLong(tasks.get(position).getDueDate());
                         Calendar cal = new GregorianCalendar();
                         cal.setTimeInMillis(taskTimeInMillis);
                         cal.add(Calendar.HOUR, (int) selectedHour);
                         cal.add(Calendar.MINUTE, (int) selectedMinute);
-                        System.out.println("hour: " + (int) selectedHour);
-                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                        //System.out.println("hour: " + (int) selectedHour);
+                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+
+                        AlarmManagerUtil.setAlarm(activity, cal.getTimeInMillis(), tasks.get(position).getId());
 
                         try {
                             dataSource = new CategoryTaskDataSource(activity);
                             dataSource.open();
 
-                            dataSource.createAlarm(tasks.get(position).getDueDate(),
-                                    DateAndTimeUtil.convertDateInMillisToString(cal.getTimeInMillis()), tasks.get(position).getId());
+                            dataSource.createAlarm(Long.parseLong(tasks.get(position).getDueDate()),
+                                    cal.getTimeInMillis(), tasks.get(position).getId());
 
                             dataSource.close();
 

@@ -208,7 +208,7 @@ public class CategoryTaskDataSource {
 
     }
 
-    public Alarm createAlarm(String date, String time, long task_id) {
+    public Alarm createAlarm(long date, long time, long task_id) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_ALARM_TIME, time);
@@ -228,8 +228,8 @@ public class CategoryTaskDataSource {
     public Alarm cursorToAlarm(Cursor cursor) {
         Alarm alarm = new Alarm();
         alarm.setId(cursor.getLong(0));
-        alarm.setDate(cursor.getString(1));
-        alarm.setAlarmTime(cursor.getString(2));
+        alarm.setDate(cursor.getLong(1));
+        alarm.setAlarmTime(cursor.getLong(2));
         alarm.setTaskId(cursor.getLong(3));
         return alarm;
     }
@@ -244,7 +244,7 @@ public class CategoryTaskDataSource {
         Cursor cursor = database.query(MySQLiteHelper.TABLE_ALARM, alarmColumns, null, null, null, null, null);
         cursor.moveToFirst();
 
-        while (cursor.isAfterLast()) {
+        while (!cursor.isAfterLast()) {
             Alarm alarm = cursorToAlarm(cursor);
             alarms.add(alarm);
             cursor.moveToNext();

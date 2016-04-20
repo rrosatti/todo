@@ -14,7 +14,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "todoManager.db";
 
     // Database version
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     // Table names
     public static final String TABLE_TASK = "tasks";
@@ -45,8 +45,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Alarm table create
     public static final String CREATE_TABLE_ALARM = "CREATE TABLE " + TABLE_ALARM + "("
                                                     + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                                    + COLUMN_DATE + " TEXT NOT NULL, "
-                                                    + COLUMN_ALARM_TIME + " TEXT NOT NULL, "
+                                                    + COLUMN_DATE + " INTEGER NOT NULL, "
+                                                    + COLUMN_ALARM_TIME + " INTEGER NOT NULL, "
                                                     + COLUMN_TASK_ID + " INTEGER NOT NULL);";
 
     // Task table create
@@ -91,6 +91,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         }
 
         if (oldVersion == 3 && newVersion == 4) {
+            db.execSQL(CREATE_TABLE_ALARM);
+        }
+
+        if (oldVersion == 4 && newVersion == 5) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_ALARM);
             db.execSQL(CREATE_TABLE_ALARM);
         }
         System.out.println("I've been here");

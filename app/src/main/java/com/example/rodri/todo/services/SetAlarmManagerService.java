@@ -40,13 +40,14 @@ public class SetAlarmManagerService extends Service {
             dataSource.open();
 
             boolean verify = dataSource.isThereAnyAlarm();
-
+            Toast.makeText(getApplicationContext(), "verify: " + verify, Toast.LENGTH_LONG).show();
             if (verify) {
                 List<Alarm> alarms = dataSource.getAllAlarms();
-
+                Toast.makeText(getApplicationContext(), "alarms.size() " + alarms.size(), Toast.LENGTH_LONG).show();
                 for (Alarm alarm : alarms) {
-                    long time = Long.parseLong(alarm.getAlarmTime());
+                    long time = alarm.getAlarmTime();
                     long task_id = alarm.getTaskId();
+                    Toast.makeText(getApplicationContext(), "alarm id " + alarm.getId(), Toast.LENGTH_LONG).show();
                     AlarmManagerUtil.setAlarm(getApplicationContext(), time, task_id);
                 }
 
