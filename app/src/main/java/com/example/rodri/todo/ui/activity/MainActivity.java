@@ -16,6 +16,7 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.category.Category;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.ui.adapter.CategoryAdapter;
+import com.example.rodri.todo.utils.Util;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Categories");
 
         GridView categoriesList = (GridView) findViewById(R.id.categoriesGridView);
 
@@ -61,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.addCategory:
                 Intent newCategory = new Intent(MainActivity.this, NewCategoryActivity.class);
                 startActivity(newCategory);
+                finish();
+                break;
+
+            case R.id.removeCategory:
+                Intent removeCategory = new Intent(MainActivity.this, RemoveCategoryActivity.class);
+                startActivity(removeCategory);
                 finish();
                 break;
 

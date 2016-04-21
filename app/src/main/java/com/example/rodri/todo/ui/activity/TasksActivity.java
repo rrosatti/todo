@@ -38,8 +38,10 @@ public class TasksActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list);
+        setTitle("Tasks");
         initialize();
 
         Bundle extras = getIntent().getExtras();
@@ -71,7 +73,7 @@ public class TasksActivity extends AppCompatActivity {
                         tasks.add(task);
                     }
                 }
-                Intent showTasksAbleToSetNotification = new Intent(TasksActivity.this, TasksNotificationActivity.class);
+                Intent showTasksAbleToSetNotification = new Intent(TasksActivity.this, NewNotificationActivity.class);
                 showTasksAbleToSetNotification.putExtra("CATEGORY_ID", category_id);
                 startActivity(showTasksAbleToSetNotification);
             }

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by rodri on 4/16/2016.
  */
-public class TasksNotificationActivity extends Activity {
+public class NewNotificationActivity extends Activity {
 
     private ListView tasksNotification;
     private CategoryTaskDataSource dataSource;
@@ -30,6 +30,7 @@ public class TasksNotificationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_notification);
         initialize();
@@ -53,7 +54,7 @@ public class TasksNotificationActivity extends Activity {
                 }
             }
 
-            adapter = new TaskNotificationAdapter(TasksNotificationActivity.this, 0, listOfTasks);
+            adapter = new TaskNotificationAdapter(NewNotificationActivity.this, 0, listOfTasks);
             tasksNotification.setAdapter(adapter);
 
 
@@ -65,7 +66,7 @@ public class TasksNotificationActivity extends Activity {
 
     public void initialize() {
         tasksNotification = (ListView) findViewById(R.id.tasksNotificationListView);
-        dataSource = new CategoryTaskDataSource(TasksNotificationActivity.this);
+        dataSource = new CategoryTaskDataSource(NewNotificationActivity.this);
         groupAndTasks = new LinkedHashMap<>();
         listOfTasks = new ArrayList<>();
     }

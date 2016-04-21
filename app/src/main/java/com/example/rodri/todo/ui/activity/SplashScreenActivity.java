@@ -8,6 +8,7 @@ import android.view.Display;
 import android.widget.ImageView;
 
 import com.example.rodri.todo.R;
+import com.example.rodri.todo.utils.Util;
 
 /**
  * Created by rodri on 4/9/2016.
@@ -19,6 +20,7 @@ public class SplashScreenActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 

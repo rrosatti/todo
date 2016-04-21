@@ -7,6 +7,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/todoImageView"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="120dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToDo"
+        android:id="@+id/txtToDo"
+        android:textSize="22pt"
+        android:textColor="#EC6851"
+        android:textStyle="bold|italic"
+        android:layout_below="@+id/todoImageView"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -9,6 +9,7 @@ import com.example.rodri.todo.alarm.Alarm;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 import com.example.rodri.todo.task.Task;
 import com.example.rodri.todo.utils.DateAndTimeUtil;
+import com.example.rodri.todo.utils.Util;
 
 import java.sql.SQLException;
 
@@ -25,6 +26,7 @@ public class NotificationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
         initialize();

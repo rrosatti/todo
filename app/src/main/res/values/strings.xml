@@ -4,6 +4,7 @@
     <!--  Menu Title  -->
     <string name="add_category">Add Category</string>
     <string name="add_task">Add Task</string>
+    <string name="remove_category">Remove Category</string>
 
     <!--  Text View  -->
     <string name="new_category">New Category</string>
@@ -14,6 +15,7 @@
     <string name="confirm">Confirm</string>
     <string name="set_due_date">Set Due Date</string>
     <string name="rememberMe">Remember Me</string>
+    <string name="remove">Remove</string>
 
     <!--  Hint  -->
     <string name="category_name">category name</string>

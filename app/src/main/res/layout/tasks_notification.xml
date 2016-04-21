@@ -8,5 +8,6 @@
         android:id="@+id/tasksNotificationListView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="80dp"
+        android:scrollbars="none"/>
 </RelativeLayout>

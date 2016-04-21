@@ -28,7 +28,7 @@
 
         <activity android:name=".ui.activity.NewTaskActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".ui.activity.TasksNotificationActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.activity.NewNotificationActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".ui.activity.NotificationActivity" android:screenOrientation="portrait"></activity>
 

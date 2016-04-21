@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.rodri.todo.R;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
+import com.example.rodri.todo.utils.Util;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -37,8 +38,8 @@ public class NewTaskActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Util.setFullScreen(this);
         super.onCreate(savedInstanceState);
-        //Util.setFullScreen(NewTaskActivity.this);
         setContentView(R.layout.new_task);
         initialize();
 
