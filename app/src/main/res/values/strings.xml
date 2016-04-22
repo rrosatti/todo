@@ -10,6 +10,7 @@
     <string name="new_category">New Category</string>
     <string name="new_task">New Task</string>
     <string name="priority">Priority</string>
+    <string name="categories_to_be_removed">Categories to be removed</string>
 
     <!--  Button  -->
     <string name="confirm">Confirm</string>

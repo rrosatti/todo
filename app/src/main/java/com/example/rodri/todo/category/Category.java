@@ -7,6 +7,7 @@ public class Category {
 
     private long id;
     private String categoryName;
+    private boolean checked = false; // verify if is checked(checkbox)
 
     public long getId() {
         return id;
@@ -22,6 +23,14 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean isChecked() {
+        return checked;
     }
 
 }

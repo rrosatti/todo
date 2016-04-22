@@ -13,6 +13,7 @@ import com.example.rodri.todo.R;
 import com.example.rodri.todo.category.Category;
 import com.example.rodri.todo.database.CategoryTaskDataSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public class RemoveCategoryAdapter extends ArrayAdapter<Category> {
         try {
             this.activity = activity;
             this.categories = categories;
+            this.checkedItems = new ArrayList<>();
 
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         } catch (Exception e) {
@@ -71,8 +73,10 @@ public class RemoveCategoryAdapter extends ArrayAdapter<Category> {
 
                 if(((CheckBox)v).isChecked()) {
                     checkedItems.add(categories.get(position).getId());
+                    categories.get(position).setChecked(true);
                 } else {
                     checkedItems.remove(categories.get(position).getId());
+                    categories.get(position).setChecked(false);
                 }
 
             }
